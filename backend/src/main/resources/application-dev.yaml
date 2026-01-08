@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://cvpro_user:cvpro123@localhost:27017/cvpro?authSource=cvpro
+
+logging:
+  level:
+    root: INFO
+    com.cvpro: DEBUG
