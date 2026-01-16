@@ -1,151 +1,151 @@
-# 🚀 CVPro Backend - API REST pour Générateur de CV Professionnel
+# CVPro Backend - REST API for Professional CV Generator
 
-## 📋 Table des Matières
-- [Vue d'ensemble](#-vue-densemble)
-- [Fonctionnalités](#-fonctionnalités)
-- [Architecture](#️-architecture)
-- [Stack Technique](#️-stack-technique)
-- [Prérequis](#-prérequis)
-- [Installation](#-installation)
-- [Configuration](#️-configuration)
-- [Lancement](#-lancement)
-- [API Endpoints](#-api-endpoints)
-- [Tests](#-tests)
-- [Déploiement](#-déploiement)
-- [Contribution](#-contribution)
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Technical Stack](#technical-stack)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
 
-## 🎯 Vue d'ensemble
-CVPro est une API REST backend complète pour la création et la gestion de CV professionnels. Elle offre un système d'authentification sécurisé avec JWT, une gestion complète des CV avec personnalisation visuelle, et un export PDF de haute qualité avec internationalisation.
+## Overview
+CVPro is a comprehensive backend REST API for creating and managing professional resumes. It features a secure authentication system using JWT, complete CV management with visual customization, and high-quality PDF export with internationalization support.
 
-### Pourquoi CVPro ?
-✅ **Sécurité robuste** : Authentification JWT, mots de passe hashés BCrypt
-✅ **Personnalisation complète** : Thèmes Light/Dark, couleurs personnalisables
-✅ **Export PDF professionnel** : Génération PDF haute qualité avec i18n
-✅ **Architecture propre** : Respect des principes SOLID et Clean Architecture
-✅ **MongoDB moderne** : NoSQL pour flexibilité et performance
-✅ **Docker Ready** : Déploiement simplifié avec Docker Compose
+### Why CVPro?
+- **Robust Security**: JWT authentication, BCrypt hashed passwords.
+- **Complete Customization**: Light/Dark themes, customizable colors.
+- **Professional PDF Export**: High-quality PDF generation with i18n.
+- **Clean Architecture**: Adherence to SOLID principles and Clean Architecture.
+- **Modern MongoDB**: NoSQL for flexibility and performance.
+- **Docker Ready**: Simplified deployment with Docker Compose.
 
-## ✨ Fonctionnalités
+## Features
 
-### 🔐 Authentification & Sécurité
-- Inscription et connexion avec JWT
-- Tokens sécurisés avec expiration configurable
-- Mots de passe hashés avec BCrypt (salt automatique)
-- Gestion des rôles (USER, ADMIN)
-- Protection CSRF et CORS configurables
+### Authentication & Security
+- Registration and login with JWT.
+- Secure tokens with configurable expiration.
+- Passwords hashed with BCrypt (automatic salt).
+- Role management (USER, ADMIN).
+- Configurable CSRF and CORS protection.
 
-### 👤 Gestion des Utilisateurs
-- CRUD utilisateur complet
-- Profil utilisateur avec préférences
-- Modification des préférences (langue, thème, couleur par défaut)
-- Changement de mot de passe sécurisé
-- Administration des utilisateurs (rôle ADMIN)
+### User Management
+- Full user CRUD operations.
+- User profile with preferences.
+- Modification of preferences (language, theme, default color).
+- Secure password change.
+- User administration (ADMIN role).
 
-### 📄 Gestion des CV
-- Création illimitée de CV par utilisateur
-- Sections complètes :
-  - Informations personnelles
-  - Résumé professionnel
-  - Expériences professionnelles (avec réalisations)
-  - Formation académique
-  - Compétences techniques (par catégories et niveaux)
-  - Langues parlées (4 niveaux)
-  - Activités bénévoles
-  - Centres d'intérêt
-- Personnalisation visuelle :
-  - Thèmes Light/Dark
-  - Couleur primaire personnalisable
-  - Couleur d'accent personnalisable
-- Opérations :
-  - Modification complète ou partielle (styling uniquement)
-  - Suppression avec vérification propriétaire
-  - Duplication de CV
+### CV Management
+- Unlimited CV creation per user.
+- **Comprehensive Sections**:
+  - Personal Information
+  - Professional Summary
+  - Work Experience (with achievements)
+  - Education
+  - Technical Skills (by category and level)
+  - Languages (4 levels)
+  - Volunteer Activities
+  - Interests
+- **Visual Customization**:
+  - Light/Dark Themes
+  - Customizable Primary Color
+  - Customizable Accent Color
+- **Operations**:
+  - Full or partial modification (styling only).
+  - Deletion with ownership verification.
+  - CV duplication.
 
-### 📥 Export PDF
-- Génération PDF haute qualité avec iText
-- Respect du thème (Light/Dark)
-- Application des couleurs personnalisées
-- Internationalisation (FR/EN) via Accept-Language
-- Nom de fichier automatique : CV_[Date].pdf
-- Headers HTTP appropriés pour téléchargement
+### PDF Export
+- High-quality PDF generation with iText.
+- Adherence to the selected theme (Light/Dark).
+- Application of custom colors.
+- Internationalization (FR/EN) via Accept-Language header.
+- Automatic filename generation: `CV_[Date].pdf`.
+- Appropriate HTTP headers for file download.
 
-### 🌍 Internationalisation
-- Support français et anglais
-- Fichiers de ressources séparés
-- Détection automatique via header Accept-Language
-- Traductions des labels dans le PDF
+### Internationalization
+- French and English language support.
+- Separate resource files for translations.
+- Automatic language detection via `Accept-Language` header.
+- Translation of labels in the generated PDF.
 
-## 🏗️ Architecture
-Le projet suit une architecture en couches avec séparation claire des responsabilités :
+## Architecture
+The project follows a layered architecture with a clear separation of concerns:
 
 ```
 ┌─────────────────────────────────────────┐
 │         Controllers (REST API)           │
-│  - Validation des entrées (DTOs)        │
-│  - Gestion des réponses HTTP            │
+│  - Input Validation (DTOs)              │
+│  - HTTP Response Management             │
 └─────────────────┬───────────────────────┘
                   │
 ┌─────────────────▼───────────────────────┐
 │       Services (Business Logic)         │
-│  - Logique métier                       │
-│  - Transactions                          │
-│  - Vérifications d'autorisation         │
+│  - Business Logic                       │
+│  - Transactions                         │
+│  - Authorization Checks                 │
 └─────────────────┬───────────────────────┘
                   │
 ┌─────────────────▼───────────────────────┐
 │        Repositories (Data Access)        │
-│  - Interactions MongoDB                  │
-│  - Requêtes personnalisées              │
+│  - MongoDB Interactions                 │
+│  - Custom Queries                       │
 └─────────────────┬───────────────────────┘
                   │
 ┌─────────────────▼───────────────────────┐
 │           MongoDB Database               │
 │  - Collections: users, cvs               │
-│  - Indexes pour performance             │
+│  - Indexes for performance              │
 └─────────────────────────────────────────┘
 ```
 
-### Composants Transversaux
-- **Security** : JWT, filtres d'authentification
-- **Mappers** : Conversion Document ↔ DTO
-- **Exceptions** : Gestion globale des erreurs
-- **Configuration** : MongoDB, Security, I18n
+### Cross-Cutting Concerns
+- **Security**: JWT, authentication filters.
+- **Mappers**: Document ↔ DTO conversion.
+- **Exceptions**: Global error handling.
+- **Configuration**: MongoDB, Security, I18n.
 
-## 🛠️ Stack Technique
+## Technical Stack
 
 ### Backend
-- **Java 17** - Langage de programmation
-- **Spring Boot 3.2.0** - Framework principal
-- **Spring Data MongoDB** - Accès aux données
-- **Spring Security** - Sécurité et authentification
-- **JWT (jjwt 0.12.3)** - Tokens d'authentification
-- **MapStruct** - Mapping automatique
-- **Lombok** - Réduction du boilerplate
-- **iText 5.5.13** - Génération PDF
+- **Java 17** - Programming Language
+- **Spring Boot 3.2.0** - Core Framework
+- **Spring Data MongoDB** - Data Access
+- **Spring Security** - Security and Authentication
+- **JWT (jjwt 0.12.3)** - Authentication Tokens
+- **MapStruct** - Automatic Mapping
+- **Lombok** - Boilerplate Reduction
+- **iText 5.5.13** - PDF Generation
 
-### Base de Données
-- **MongoDB 7.0** - Base NoSQL
-- **Mongo Express** - Interface web d'administration
+### Database
+- **MongoDB 7.0** - NoSQL Database
+- **Mongo Express** - Web-based administration interface
 
 ### DevOps & Tools
-- **Docker & Docker Compose** - Conteneurisation
-- **Maven** - Gestion des dépendances
-- **JUnit 5** - Tests unitaires
-- **Mockito** - Mocking pour tests
-- **Testcontainers** - Tests d'intégration
+- **Docker & Docker Compose** - Containerization
+- **Maven** - Dependency Management
+- **JUnit 5** - Unit Testing
+- **Mockito** - Mocking for tests
+- **Testcontainers** - Integration Testing
 
 ### Documentation
-- **SpringDoc OpenAPI 3** - Documentation API interactive (Swagger)
+- **SpringDoc OpenAPI 3** - Interactive API documentation (Swagger)
 
-## 📦 Prérequis
-Avant de commencer, assurez-vous d'avoir installé :
-- Java 17 ou supérieur
+## Prerequisites
+Before you begin, ensure you have the following installed:
+- Java 17 or higher
 - Maven 3.8+
-- Docker et Docker Compose
+- Docker and Docker Compose
 - Git
-- Un éditeur de code (IntelliJ IDEA, VS Code, Eclipse)
+- A code editor (IntelliJ IDEA, VS Code, Eclipse)
 
-### Vérification des versions
+### Version Check
 ```bash
 java -version    # Java 17+
 mvn -version     # Maven 3.8+
@@ -153,23 +153,23 @@ docker --version # Docker 20.10+
 docker-compose --version
 ```
 
-## 🚀 Installation
+## Installation
 
-### 1. Cloner le projet
+### 1. Clone the Project
 ```bash
-git clone https://github.com/votre-username/cvpro-backend.git
+git clone https://github.com/your-username/cvpro-backend.git
 cd cvpro-backend
 ```
 
-### 2. Créer le fichier .env
-Copiez le contenu suivant dans un fichier `.env` à la racine du projet :
+### 2. Create the .env file
+Copy the following content into a `.env` file at the root of the project:
 ```dotenv
 # MongoDB Root Credentials
 MONGO_ROOT_USERNAME=admin
 MONGO_ROOT_PASSWORD=SecurePassword123!
 MONGO_PORT=27017
 
-# Mongo Express (Interface web)
+# Mongo Express (Web Interface)
 MONGO_EXPRESS_PORT=8081
 MONGO_EXPRESS_USERNAME=admin
 MONGO_EXPRESS_PASSWORD=admin123
@@ -180,108 +180,109 @@ MONGO_APP_USERNAME=cvpro_user
 MONGO_APP_PASSWORD=CvPro2025!
 
 # JWT Configuration
-JWT_SECRET=VotreSuperSecretJWTKeyQuiDoitEtreTresLongueEtSecurisee2025CvPro!
+JWT_SECRET=YourSuperSecretJWTKeyThatShouldBeVeryLongAndSecure2025CvPro!
 JWT_EXPIRATION=86400000
 
 # Spring Profile
 SPRING_PROFILES_ACTIVE=dev
 SERVER_PORT=8080
 ```
-⚠️ **IMPORTANT** : Ne jamais committer le fichier `.env` ! Il est déjà dans `.gitignore`.
+**IMPORTANT**: Never commit the `.env` file! It is already included in `.gitignore`.
 
-### 3. Créer le dossier d'initialisation MongoDB
+### 3. Create the MongoDB Initialization Directory
 ```bash
 mkdir -p mongo-init
 ```
-Créez le fichier `mongo-init/01-init-db.js` avec le contenu du script d'initialisation fourni.
+Create the file `mongo-init/01-init-db.js` with the content of the provided initialization script.
 
-## ⚙️ Configuration
+## Configuration
 
-### Profils Spring
-Le projet utilise 3 profils :
-- `dev` (par défaut) : Développement local
-- `test` : Tests unitaires et intégration
-- `prod` : Production
+### Spring Profiles
+The project uses three profiles:
+- `dev` (default): Local development
+- `test`: Unit and integration testing
+- `prod`: Production
 
-### Variables d'environnement
-Toutes les configurations sensibles sont externalisées dans `.env` :
+### Environment Variables
+All sensitive configurations are externalized in `.env`:
 
-| Variable              | Description          | Valeur par défaut |
-|-----------------------|----------------------|-------------------|
-| MONGO_ROOT_USERNAME   | Admin MongoDB        | `admin`           |
-| MONGO_ROOT_PASSWORD   | Mot de passe admin   | `SecurePassword123!` |
-| MONGO_APP_USERNAME    | User applicatif      | `cvpro_user`      |
-| MONGO_APP_PASSWORD    | Password applicatif  | `CvPro2025!`      |
-| JWT_SECRET            | Secret pour JWT      | (longue clé)      |
-| JWT_EXPIRATION        | Expiration token (ms)| `86400000` (24h)  |
-| SERVER_PORT           | Port Spring Boot     | `8080`            |
+| Variable              | Description           | Default Value      |
+|-----------------------|-----------------------|--------------------|
+| MONGO_ROOT_USERNAME   | MongoDB Admin User    | `admin`            |
+| MONGO_ROOT_PASSWORD   | Admin Password        | `SecurePassword123!`|
+| MONGO_APP_USERNAME    | Application User      | `cvpro_user`       |
+| MONGO_APP_PASSWORD    | Application Password  | `CvPro2025!`       |
+| JWT_SECRET            | JWT Secret            | (long key)         |
+| JWT_EXPIRATION        | Token Expiration (ms) | `86400000` (24h)   |
+| SERVER_PORT           | Spring Boot Port      | `8080`             |
 
-## 🎬 Lancement
+## Usage
 
-### Option 1 : Avec Docker Compose (Recommandé)
+### Option 1: With Docker Compose (Recommended)
 
-#### 1. Démarrer MongoDB
+#### 1. Start MongoDB
 ```bash
 docker-compose up -d
 ```
-Cela démarre :
-- MongoDB sur le port `27017`
-- Mongo Express sur le port `8081`
+This starts:
+- MongoDB on port `27017`
+- Mongo Express on port `8081`
 
-#### 2. Vérifier que MongoDB est prêt
+#### 2. Verify MongoDB is Ready
 ```bash
 docker-compose ps
 docker-compose logs mongodb
 ```
-Vous devriez voir : ✅ `Database "cvpro" initialized successfully`
+You should see: `Database "cvpro" initialized successfully`
 
-#### 3. Accéder à Mongo Express
-Ouvrez votre navigateur : http://localhost:8081
-- **Username** : `admin`
-- **Password** : `admin123`
+#### 3. Access Mongo Express
+Open your browser to: http://localhost:8081
+- **Username**: `admin`
+- **Password**: `admin123`
 
-#### 4. Compiler et lancer l'application
+#### 4. Compile and Run the Application
 ```bash
 mvn clean install
 mvn spring-boot:run
 ```
 
-#### 5. Vérifier que l'application fonctionne
+#### 5. Verify the Application is Running
 ```bash
 curl http://localhost:8080/actuator/health
 ```
-Réponse attendue : `{"status":"UP"}`
+Expected response: `{"status":"UP"}`
 
-### Option 2 : Sans Docker (MongoDB local)
-Si vous avez MongoDB installé localement :
+### Option 2: Without Docker (Local MongoDB)
+If you have MongoDB installed locally:
 ```bash
-# 1. Démarrer MongoDB
-mongod --dbpath /chemin/vers/data
+# 1. Start MongoDB
+mongod --dbpath /path/to/data
 
-# 2. Créer la base de données
+# 2. Create the database
 mongosh
 > use cvpro
 > db.createUser({user: "cvpro_user", pwd: "CvPro2025!", roles: [{role: "readWrite", db: "cvpro"}]})
 
-# 3. Lancer l'application
+# 3. Run the application
 mvn spring-boot:run
 ```
-## 📡 API Endpoints
+
+## API Endpoints
 
 ### Swagger UI
-Documentation interactive disponible sur :
-**URL** : http://localhost:8080/swagger-ui.html
+Interactive documentation is available at:
+**URL**: http://localhost:8080/swagger-ui.html
 
 ![Swagger UI](./public/cvPro_swagger.png)
 
-### Authentification (Public)
+### Authentication (Public)
 
-| Méthode | Endpoint             | Description |
-|---------|----------------------|-------------|
-| POST    | `/api/auth/register` | Inscription |
-| POST    | `/api/auth/login`    | Connexion   |
+| Method | Endpoint             | Description  |
+|--------|----------------------|--------------|
+| POST   | `/api/auth/register` | Registration |
+| POST   | `/api/auth/login`    | Login        |
 
-**Exemple - Inscription** :
+**Example - Registration**:
 ```bash
 curl -X POST http://localhost:8080/api/auth/register \
   -H "Content-Type: application/json" \
@@ -292,7 +293,7 @@ curl -X POST http://localhost:8080/api/auth/register \
     "password": "password123"
   }'
 ```
-Réponse :
+Response:
 ```json
 {
   "token": "eyJhbGciOiJIUzUxMiJ9...",
@@ -304,51 +305,51 @@ Réponse :
 }
 ```
 
-### Utilisateurs (Authentifié)
+### Users (Authenticated)
 
-| Méthode | Endpoint                      | Description           | Rôle  |
-|---------|-------------------------------|-----------------------|-------|
-| GET     | `/api/users/me`               | Profil utilisateur    | USER  |
-| PUT     | `/api/users/me`               | Modifier profil       | USER  |
-| PATCH   | `/api/users/me/preferences`   | Modifier préférences  | USER  |
-| PATCH   | `/api/users/me/password`      | Changer mot de passe  | USER  |
-| DELETE  | `/api/users/me`               | Supprimer compte      | USER  |
-| GET     | `/api/users`                  | Liste utilisateurs    | ADMIN |
-| GET     | `/api/users/{id}`             | Détails utilisateur   | ADMIN |
-| DELETE  | `/api/users/{id}`             | Supprimer utilisateur | ADMIN |
+| Method | Endpoint                    | Description         | Role  |
+|--------|-----------------------------|---------------------|-------|
+| GET    | `/api/users/me`             | User Profile        | USER  |
+| PUT    | `/api/users/me`             | Modify Profile      | USER  |
+| PATCH  | `/api/users/me/preferences` | Modify Preferences  | USER  |
+| PATCH  | `/api/users/me/password`    | Change Password     | USER  |
+| DELETE | `/api/users/me`             | Delete Account      | USER  |
+| GET    | `/api/users`                | List Users          | ADMIN |
+| GET    | `/api/users/{id}`           | User Details        | ADMIN |
+| DELETE | `/api/users/{id}`           | Delete User         | ADMIN |
 
-**Exemple - Récupérer profil** :
+**Example - Get Profile**:
 ```bash
 curl -X GET http://localhost:8080/api/users/me \
-  -H "Authorization: Bearer <votre_token>"
+  -H "Authorization: Bearer <your_token>"
 ```
 
-### CV (Authentifié)
+### CV (Authenticated)
 
-| Méthode | Endpoint                  | Description         |
-|---------|---------------------------|---------------------|
-| GET     | `/api/cvs`                | Liste mes CV        |
-| POST    | `/api/cvs`                | Créer CV            |
-| GET     | `/api/cvs/{id}`           | Détails CV          |
-| PUT     | `/api/cvs/{id}`           | Modifier CV complet |
-| PATCH   | `/api/cvs/{id}/styling`   | Modifier styling    |
-| DELETE  | `/api/cvs/{id}`           | Supprimer CV        |
-| POST    | `/api/cvs/{id}/duplicate` | Dupliquer CV        |
+| Method | Endpoint                  | Description       |
+|--------|---------------------------|-------------------|
+| GET    | `/api/cvs`                | List My CVs       |
+| POST   | `/api/cvs`                | Create CV         |
+| GET    | `/api/cvs/{id}`           | CV Details        |
+| PUT    | `/api/cvs/{id}`           | Modify Full CV    |
+| PATCH  | `/api/cvs/{id}/styling`   | Modify Styling    |
+| DELETE | `/api/cvs/{id}`           | Delete CV         |
+| POST   | `/api/cvs/{id}/duplicate` | Duplicate CV      |
 
-**Exemple - Créer un CV** :
+**Example - Create a CV**:
 ```bash
 curl -X POST http://localhost:8080/api/cvs \
   -H "Authorization: Bearer <token>" \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "CV Développeur Full Stack",
+    "title": "Full Stack Developer CV",
     "personalInfo": {
       "fullName": "John Doe",
-      "jobTitle": "Développeur Full Stack",
+      "jobTitle": "Full Stack Developer",
       "email": "john.doe@example.com",
       "phone": "+33 6 12 34 56 78"
     },
-    "summary": "Développeur passionné avec 5 ans d'expérience",
+    "summary": "Passionate developer with 5 years of experience",
     "styling": {
       "theme": "LIGHT",
       "primaryColor": "#3B82F6",
@@ -357,53 +358,53 @@ curl -X POST http://localhost:8080/api/cvs \
   }'
 ```
 
-### Export (Authentifié)
+### Export (Authenticated)
 
-| Méthode | Endpoint                      | Description     |
-|---------|-------------------------------|-----------------|
-| GET     | `/api/export/pdf/{cvId}?lang=fr` | Télécharger PDF |
+| Method | Endpoint                       | Description    |
+|--------|--------------------------------|----------------|
+| GET    | `/api/export/pdf/{cvId}?lang=en` | Download PDF   |
 
-**Exemple - Export PDF** :
+**Example - Export PDF**:
 ```bash
-curl -X GET "http://localhost:8080/api/export/pdf/cv123?lang=fr" \
+curl -X GET "http://localhost:8080/api/export/pdf/cv123?lang=en" \
   -H "Authorization: Bearer <token>" \
-  -H "Accept-Language: fr" \
+  -H "Accept-Language: en" \
   --output CV_John_Doe.pdf
 ```
 
-## 🧪 Tests
+## Testing
 
-### Exécuter tous les tests
+### Run All Tests
 ```bash
 mvn test
 ```
 
-### Tests unitaires uniquement
+### Unit Tests Only
 ```bash
 mvn test -Dtest=*Test
 ```
 
-### Tests d'intégration
+### Integration Tests
 ```bash
 mvn test -Dtest=*IT
 ```
 
-### Couverture de code
+### Code Coverage
 ```bash
 mvn test jacoco:report
 ```
-Le rapport est généré dans `target/site/jacoco/index.html`.
+The report is generated in `target/site/jacoco/index.html`.
 
-## 🚢 Déploiement
+## Deployment
 
-### Production avec Docker
+### Production with Docker
 
-**Build de l'application** :
+**Build the Application**:
 ```bash
 mvn clean package -DskipTests
 ```
 
-**Créer l'image Docker** :
+**Create Docker Image**:
 ```Dockerfile
 # Dockerfile
 FROM eclipse-temurin:17-jre-alpine
@@ -416,8 +417,8 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 docker build -t cvpro-backend:1.0.0 .
 ```
 
-**Lancer avec docker-compose** :
-Ajoutez le service dans `docker-compose.yml` :
+**Run with docker-compose**:
+Add the service to `docker-compose.yml`:
 ```yaml
   backend:
     build: .
@@ -436,8 +437,8 @@ Ajoutez le service dans `docker-compose.yml` :
 docker-compose up -d
 ```
 
-### Variables d'environnement Production
-Créez un fichier `.env.production` :
+### Production Environment Variables
+Create a `.env.production` file:
 ```dotenv
 MONGO_ROOT_PASSWORD=<strong_password>
 MONGO_APP_PASSWORD=<strong_password>
@@ -445,25 +446,25 @@ JWT_SECRET=<very_long_random_secret>
 SPRING_PROFILES_ACTIVE=prod
 ```
 
-## 📖 Documentation Supplémentaire
+## Additional Documentation
 
-### Structure du Projet
+### Project Structure
 ```
 cvpro-backend/
 ├── src/main/java/com/cvpro/
 │   ├── config/                 # Configurations
 │   ├── controller/             # REST Controllers
 │   ├── document/               # MongoDB Documents
-│   │   └── embedded/           # Classes embarquées
+│   │   └── embedded/           # Embedded Classes
 │   ├── dto/                    # Data Transfer Objects
 │   │   ├── request/
 │   │   └── response/
-│   ├── enums/                  # Énumérations
-│   ├── exception/              # Gestion des erreurs
+│   ├── enums/                  # Enumerations
+│   ├── exception/              # Error Handling
 │   ├── mapper/                 # Mappers
-│   ├── repository/             # Repositories MongoDB
-│   ├── security/               # Configuration sécurité JWT
-│   ├── service/                # Services métier
+│   ├── repository/             # MongoDB Repositories
+│   ├── security/               # JWT Security Configuration
+│   ├── service/                # Business Services
 │   │   └── impl/
 │   └── CvProApplication.java
 ├── src/main/resources/
@@ -472,8 +473,8 @@ cvpro-backend/
 │   ├── application-test.yml
 │   ├── application-prod.yml
 │   └── i18n/
-│       ├── messages_fr.properties
-│       └── messages_en.properties
+│       ├── messages_en.properties
+│       └── messages_fr.properties
 ├── src/test/java/              # Tests
 ├── docker-compose.yml
 ├── .env
@@ -482,48 +483,37 @@ cvpro-backend/
 └── README.md
 ```
 
-### Bonnes Pratiques Utilisées
-✅ **Séparation des couches** : Controller → Service → Repository
-✅ **DTOs immutables** : Records Java 17
-✅ **Validation double** : DTOs + Services
-✅ **Gestion d'erreurs centralisée** : GlobalExceptionHandler
-✅ **Logging structuré** : SLF4J avec niveaux appropriés
-✅ **Transactions** : `@Transactional` sur méthodes de modification
-✅ **Sécurité** : JWT, BCrypt, vérification propriétaire
-✅ **Tests** : Unitaires + Intégration
+### Best Practices Used
+- **Layer Separation**: Controller → Service → Repository
+- **Immutable DTOs**: Java 17 Records
+- **Dual Validation**: DTOs + Services
+- **Centralized Error Handling**: GlobalExceptionHandler
+- **Structured Logging**: SLF4J with appropriate levels
+- **Transactions**: `@Transactional` on modification methods
+- **Security**: JWT, BCrypt, ownership verification
+- **Testing**: Unit + Integration
 
-## 🤝 Contribution
-Les contributions sont les bienvenues ! Voici comment contribuer :
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
-3. Commit vos changements (`git commit -m 'Add AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+## Contributing
+Contributions are welcome! Here's how to contribute:
+1. Fork the project
+2. Create a branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-### Règles de Contribution
-- Code formaté selon les conventions Java
-- Tests unitaires pour les nouvelles fonctionnalités
-- Documentation mise à jour
-- Messages de commit clairs et descriptifs
+### Contribution Rules
+- Code formatted according to Java conventions
+- Unit tests for new features
+- Updated documentation
+- Clear and descriptive commit messages
 
-## 📄 Licence
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+## Author
+- **Email**:pakoujuste2019@gmail.com
+- **GitHub**: Juste_sama
 
-## 👨‍💻 Auteur
-**CVPro Team**
-- **Email**: contact@cvpro.com
-- **GitHub**: @cvpro
-
-## 🙏 Remerciements
+## Acknowledgements
 - Spring Boot Team
 - MongoDB Team
 - iText Team
-- Communauté Open Source
+- The Open Source Community
 
-## 📞 Support
-Pour toute question ou problème :
-- 📧 **Email**: support@cvpro.com
-- 💬 **Discord**: CVPro Community
-- 🐛 **Issues**: GitHub Issues
-
-Développé avec ❤️ par l'équipe CVPro
