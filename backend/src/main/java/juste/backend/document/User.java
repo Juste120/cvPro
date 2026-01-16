@@ -1,10 +1,10 @@
-package juste.backend.entities;
+package juste.backend.document;
 
 /**
  * @author PAKOU Komi Juste
  * @since 1/8/26
  */
-
+import juste.backend.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,31 +16,25 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "cvs")
-public class CV {
+@Document(collection = "users")
+public class User {
 
     @Id
     private String id;
 
-    @Indexed
-    private String userId;
+    @Indexed(unique = true)
+    private String email;
 
-    private String title;
-    private PersonalInfo personalInfo;
-    private String summary;
-    private List<Experience> experiences;
-    private List<Education> education;
-    private List<Skill> skills;
-    private List<Language> languages;
-    private List<VolunteerActivity> volunteerActivities;
-    private List<String> interests;
-    private Styling styling;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private Role role;
+    private Preferences preferences;
 
     @CreatedDate
     private LocalDateTime createdAt;

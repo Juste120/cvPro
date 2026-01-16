@@ -1,4 +1,4 @@
-package juste.backend.entities;
+package juste.backend.document;
 
 /**
  * @author PAKOU Komi Juste
@@ -10,19 +10,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Experience {
-    private String position;
-    private String company;
+public class Education {
+    private String degree;
+    private String institution;
     private String location;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Boolean isCurrent;
-    private String description;
-    private List<String> achievements;
 }

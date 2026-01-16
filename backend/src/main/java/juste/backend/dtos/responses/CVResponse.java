@@ -4,7 +4,7 @@ package juste.backend.dtos.responses;
  * @author PAKOU Komi Juste
  * @since 1/9/26
  */
-import juste.backend.entities.*;
+import juste.backend.document.*;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,6 +1,6 @@
 package juste.backend.repositories;
 
-import juste.backend.entities.CV;
+import juste.backend.document.CV;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

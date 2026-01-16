@@ -1,6 +1,6 @@
 package juste.backend.repositories;
 
-import juste.backend.entities.User;
+import juste.backend.document.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

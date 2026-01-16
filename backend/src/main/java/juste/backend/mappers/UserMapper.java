@@ -1,7 +1,7 @@
 package juste.backend.mappers;
 
 import juste.backend.dtos.responses.UserResponse;
-import juste.backend.entities.User;
+import juste.backend.document.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

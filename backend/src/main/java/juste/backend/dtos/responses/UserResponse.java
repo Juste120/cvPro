@@ -5,7 +5,7 @@ package juste.backend.dtos.responses;
  * @since 1/9/26
  */
 
-import juste.backend.entities.Preferences;
+import juste.backend.document.Preferences;
 
 public record UserResponse(
         String id,

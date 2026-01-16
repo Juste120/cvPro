@@ -1,10 +1,10 @@
-package juste.backend.entities;
+package juste.backend.document;
 
 /**
  * @author PAKOU Komi Juste
  * @since 1/8/26
  */
-import juste.backend.enums.LanguageLevel;
+import juste.backend.enums.Theme;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Language {
-    private String name;
-    private LanguageLevel level;
+public class Styling {
+    private Theme theme;
+    private String primaryColor;
+    private String accentColor;
 }

@@ -2,7 +2,7 @@ package juste.backend.mappers;
 
 import juste.backend.dtos.requests.*;
 import juste.backend.dtos.responses.CVResponse;
-import juste.backend.entities.*;
+import juste.backend.document.*;
 import juste.backend.enums.LanguageLevel;
 import juste.backend.enums.SkillLevel;
 import juste.backend.enums.Theme;

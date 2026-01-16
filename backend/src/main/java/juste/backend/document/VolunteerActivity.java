@@ -1,4 +1,4 @@
-package juste.backend.entities;
+package juste.backend.document;
 
 /**
  * @author PAKOU Komi Juste
@@ -15,10 +15,11 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Education {
-    private String degree;
-    private String institution;
-    private String location;
+public class VolunteerActivity {
+    private String role;
+    private String organization;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Boolean isCurrent;
+    private String description;
 }

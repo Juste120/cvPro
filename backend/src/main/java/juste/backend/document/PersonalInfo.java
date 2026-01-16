@@ -1,4 +1,4 @@
-package juste.backend.entities;
+package juste.backend.document;
 
 /**
  * @author PAKOU Komi Juste
